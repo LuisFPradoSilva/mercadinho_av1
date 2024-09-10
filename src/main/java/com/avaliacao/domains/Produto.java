@@ -55,14 +55,11 @@ public class Produto {
         addUnidadeMedida(UnidadeMedida.UN);
     }
 
-    public Produto(int id, String descricao, double valor, double peso, LocalDate dataFabricacao,
-            LocalDate dataValidade, double qtdEstoque) {
+    public Produto(int id, String descricao, double valor, double peso, double qtdEstoque) {
         this.id = id;
         this.descricao = descricao;
         this.valor = valor;
         this.peso = peso;
-        this.dataFabricacao = dataFabricacao;
-        this.dataValidade = dataValidade;
         this.qtdEstoque = qtdEstoque;
         addTipoProduto(TipoProduto.COMIDA);
         addUnidadeMedida(UnidadeMedida.UN);
