@@ -3,6 +3,8 @@ package com.avaliacao.domains;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import com.avaliacao.domains.enums.TipoProduto;
@@ -19,6 +21,7 @@ public class Produto {
     private double qtdEstoque;
     private Set<Integer> tipoProduto = new HashSet<>();
     private Set<Integer> unidadeMedida = new HashSet<>();
+    private List<Venda> vendas = new ArrayList<>();
     
     public Produto() {
         addTipoProduto(TipoProduto.COMIDA);
@@ -108,6 +111,14 @@ public class Produto {
 
     public void addUnidadeMedida(UnidadeMedida unidadeMedida) {
         this.unidadeMedida.add(unidadeMedida.getId());
+    }
+
+    public List<Venda> getVendas() {
+        return vendas;
+    }
+
+    public void setVendas(List<Venda> vendas) {
+        this.vendas = vendas;
     }
 
     @Override
