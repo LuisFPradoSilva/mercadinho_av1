@@ -6,14 +6,38 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.avaliacao.domains.enums.TipoPessoa;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "pessoa")
 public class Pessoa {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     protected Long id;
+
+    @Column(unique = true)
     protected String cpf;
     protected String nome;
+
+    @Column(unique = true)
     protected String telefone;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDate dataCadastro = LocalDate.now();
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "perfis")
     protected Set<Integer> tipoPessoa = new HashSet<>();
     
     public Pessoa() {

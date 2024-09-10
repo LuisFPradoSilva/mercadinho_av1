@@ -1,20 +1,42 @@
 package com.avaliacao.domains;
 
 import org.hibernate.validator.constraints.UUID;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
 
-
+@Entity
+@Table(name = "venda")
 public class Venda {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private double qtdProdutos;
     private double valorTotal;
     private double desconto;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataVenda = LocalDate.now();
     private String formaPagamento;
+
+    @ManyToOne
+    @JoinColumn(name = "idcliente")
     private Cliente cliente;
+
+    @ManyToMany(mappedBy = "vendas")
     private List<Produto> produtos = new ArrayList<>();
 
     public Venda() {

@@ -2,6 +2,11 @@ package com.avaliacao.domains;
 
 import com.avaliacao.domains.enums.TipoPessoa;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "funcionario")
 public class Funcionario extends Pessoa {
 
     private String cargo;

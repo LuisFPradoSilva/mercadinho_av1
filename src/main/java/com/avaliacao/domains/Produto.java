@@ -9,18 +9,45 @@ import java.util.stream.Collectors;
 
 import com.avaliacao.domains.enums.TipoProduto;
 import com.avaliacao.domains.enums.UnidadeMedida;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "produto")
 public class Produto {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     private String descricao;
     private double valor;
     private double peso;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataFabricacao;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataValidade;
     private double qtdEstoque;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "tipoproduto")
     private Set<Integer> tipoProduto = new HashSet<>();
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "unidademedida")
     private Set<Integer> unidadeMedida = new HashSet<>();
+
+    @ManyToMany(mappedBy = "produtos")
     private List<Venda> vendas = new ArrayList<>();
     
     public Produto() {
