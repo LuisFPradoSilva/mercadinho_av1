@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Logs ###
+mercadinho_test.log
+mercadinho_dev.log
