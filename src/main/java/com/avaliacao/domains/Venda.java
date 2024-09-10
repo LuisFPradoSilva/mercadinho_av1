@@ -1,6 +1,5 @@
 package com.avaliacao.domains;
 
-import org.hibernate.validator.constraints.UUID;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -9,12 +8,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 import java.util.ArrayList;
 
 @Entity
@@ -36,7 +37,8 @@ public class Venda {
     @JoinColumn(name = "idcliente")
     private Cliente cliente;
 
-    @ManyToMany(mappedBy = "vendas")
+    @ManyToMany
+    @JoinTable(name = "venda_produtos", joinColumns = @JoinColumn(name = "venda_id"), inverseJoinColumns = @JoinColumn(name = "produto_id"))
     private List<Produto> produtos = new ArrayList<>();
 
     public Venda() {
