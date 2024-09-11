@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import com.avaliacao.domains.dtos.ProdutoDTO;
 import com.avaliacao.domains.enums.TipoProduto;
 import com.avaliacao.domains.enums.UnidadeMedida;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -63,6 +64,18 @@ public class Produto {
         this.valor = valor;
         this.peso = peso;
         this.qtdEstoque = qtdEstoque;
+        addTipoProduto(TipoProduto.COMIDA);
+        addUnidadeMedida(UnidadeMedida.UN);
+    }
+
+    public Produto(ProdutoDTO obj) {
+        this.id = obj.getId();
+        this.descricao = obj.getDescricao();
+        this.valor = obj.getValor();
+        this.peso = obj.getPeso();
+        this.qtdEstoque = obj.getQtdEstoque();
+        this.tipoProduto = obj.getTipoProduto().stream().map(x -> x.getId()).collect(Collectors.toSet());
+        this.unidadeMedida = obj.getUnidadeMedida().stream().map(x -> x.getId()).collect(Collectors.toSet());
         addTipoProduto(TipoProduto.COMIDA);
         addUnidadeMedida(UnidadeMedida.UN);
     }

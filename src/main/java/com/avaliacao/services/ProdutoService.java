@@ -26,4 +26,10 @@ public class ProdutoService {
         Optional<Produto> obj = produtoRepo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! ID: " + id));
     }
+
+    public Produto create(ProdutoDTO objDto) {
+        objDto.setId(0);
+        Produto newObj = new Produto(objDto);
+        return produtoRepo.save(newObj);
+    }
 }
