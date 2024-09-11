@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import com.avaliacao.domains.enums.TipoProduto;
 import com.avaliacao.domains.enums.UnidadeMedida;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.ElementCollection;
@@ -47,6 +48,7 @@ public class Produto {
     @CollectionTable(name = "unidademedida")
     private Set<Integer> unidadeMedida = new HashSet<>();
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "produtos")
     private List<Venda> vendas = new ArrayList<>();
     

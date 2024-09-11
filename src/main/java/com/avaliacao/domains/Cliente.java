@@ -3,6 +3,7 @@ package com.avaliacao.domains;
 import java.util.List;
 
 import com.avaliacao.domains.enums.TipoPessoa;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 @Entity
 public class Cliente extends Pessoa {
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Venda> vendas = new ArrayList<>();
 

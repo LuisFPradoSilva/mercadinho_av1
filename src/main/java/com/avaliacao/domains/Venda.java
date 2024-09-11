@@ -2,6 +2,7 @@ package com.avaliacao.domains;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,6 +38,7 @@ public class Venda {
     @JoinColumn(name = "idcliente")
     private Cliente cliente;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "venda_produtos", joinColumns = @JoinColumn(name = "venda_id"), inverseJoinColumns = @JoinColumn(name = "produto_id"))
     private List<Produto> produtos = new ArrayList<>();
