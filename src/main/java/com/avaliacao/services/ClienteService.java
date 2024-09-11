@@ -31,4 +31,10 @@ public class ClienteService {
         Optional<Cliente> obj = clienteRepo.findByCpf(cpf);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! CPF: " + cpf));
     }
+
+    public Cliente create(ClienteDTO objDto) {
+        objDto.setId(null);
+        Cliente newObj = new Cliente(objDto);
+        return clienteRepo.save(newObj);
+    }
 }
