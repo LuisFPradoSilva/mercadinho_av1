@@ -30,4 +30,10 @@ public class ClienteResource {
         Cliente obj = this.clienteService.findById(id);
         return ResponseEntity.ok().body(new ClienteDTO(obj));
     }
+
+    @GetMapping(value = "/cpf/{cpf}")
+    public ResponseEntity<ClienteDTO> findById(@PathVariable String cpf) {
+        Cliente obj = this.clienteService.findByCpf(cpf);
+        return ResponseEntity.ok().body(new ClienteDTO(obj));
+    }
 }
