@@ -25,4 +25,9 @@ public class FuncionarioService {
         Optional<Funcionario> obj = funcionarioRepo.findById(id);
         return obj.orElse(null);
     } 
+
+    public Funcionario findByCpf(String cpf) {
+        Optional<Funcionario> obj = funcionarioRepo.findByCpf(cpf);
+        return obj.orElse(null);
+    }
 }

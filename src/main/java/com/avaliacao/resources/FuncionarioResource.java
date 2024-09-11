@@ -30,4 +30,10 @@ public class FuncionarioResource {
         Funcionario obj = this.funcionarioService.findById(id);
         return ResponseEntity.ok().body(new FuncionarioDTO(obj));
     }
+
+    @GetMapping(value = "/cpf/{cpf}")
+    public ResponseEntity<FuncionarioDTO> findByCpf(@PathVariable String cpf) {
+        Funcionario obj = this.funcionarioService.findByCpf(cpf);
+        return ResponseEntity.ok().body(new FuncionarioDTO(obj));
+    }
 }
