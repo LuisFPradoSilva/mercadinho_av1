@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.avaliacao.domains.Funcionario;
 import com.avaliacao.domains.dtos.FuncionarioDTO;
 import com.avaliacao.repositories.FuncionarioRepository;
+import com.avaliacao.services.exceptions.DataIntegrityViolationException;
 import com.avaliacao.services.exceptions.ObjectNotFoundException;
 
 import java.util.List;
@@ -34,7 +35,16 @@ public class FuncionarioService {
 
     public Funcionario crate(FuncionarioDTO objDto) {
         objDto.setId(null);
+        validaPorCPF(objDto);
         Funcionario newObj = new Funcionario(objDto);
         return funcionarioRepo.save(newObj);
+    }
+
+        private void validaPorCPF(FuncionarioDTO objDto) {
+        Optional<Funcionario> obj = funcionarioRepo.findByCpf(objDto.getCpf());
+
+        if(obj.isPresent() && obj.get().getId() != objDto.getId()) {
+            throw new DataIntegrityViolationException("CPF já cadastrado no sistema!");
+        }
     }
 }

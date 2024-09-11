@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.avaliacao.domains.Cliente;
 import com.avaliacao.domains.dtos.ClienteDTO;
 import com.avaliacao.repositories.ClienteRepository;
+import com.avaliacao.services.exceptions.DataIntegrityViolationException;
 import com.avaliacao.services.exceptions.ObjectNotFoundException;
 
 import java.util.List;
@@ -34,7 +35,16 @@ public class ClienteService {
 
     public Cliente create(ClienteDTO objDto) {
         objDto.setId(null);
+        validaPorCPF(objDto);
         Cliente newObj = new Cliente(objDto);
         return clienteRepo.save(newObj);
+    }
+
+    private void validaPorCPF(ClienteDTO objDto) {
+        Optional<Cliente> obj = clienteRepo.findByCpf(objDto.getCpf());
+
+        if(obj.isPresent() && obj.get().getId() != objDto.getId()) {
+            throw new DataIntegrityViolationException("CPF já cadastrado no sistema!");
+        }
     }
 }
