@@ -31,4 +31,10 @@ public class FuncionarioService {
         Optional<Funcionario> obj = funcionarioRepo.findByCpf(cpf);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! CPF: " + cpf));
     }
+
+    public Funcionario crate(FuncionarioDTO objDto) {
+        objDto.setId(null);
+        Funcionario newObj = new Funcionario(objDto);
+        return funcionarioRepo.save(newObj);
+    }
 }

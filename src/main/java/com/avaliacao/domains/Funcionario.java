@@ -1,5 +1,8 @@
 package com.avaliacao.domains;
 
+import java.util.stream.Collectors;
+
+import com.avaliacao.domains.dtos.FuncionarioDTO;
 import com.avaliacao.domains.enums.TipoPessoa;
 
 import jakarta.persistence.Entity;
@@ -20,6 +23,17 @@ public class Funcionario extends Pessoa {
         this.cargo = cargo;
         this.salario = salario;
         addTipoPessoa(TipoPessoa.FUNCIONARIO);
+    }
+
+    public Funcionario(FuncionarioDTO obj) {
+        this.id = obj.getId();
+        this.cpf = obj.getCpf();
+        this.nome = obj.getNome();
+        this.telefone = obj.getTelefone();
+        this.dataCadastro = obj.getDataCadastro();
+        this.tipoPessoa = obj.getTipoPessoa().stream().map(x -> x.getId()).collect(Collectors.toSet());
+        addTipoPessoa(TipoPessoa.FUNCIONARIO);
+        addTipoPessoa(TipoPessoa.CLIENTE);
     }
 
     public String getCargo() {
