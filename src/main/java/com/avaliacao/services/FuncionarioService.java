@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.avaliacao.domains.Funcionario;
 import com.avaliacao.domains.dtos.FuncionarioDTO;
 import com.avaliacao.repositories.FuncionarioRepository;
+import com.avaliacao.services.exceptions.ObjectNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,11 +24,11 @@ public class FuncionarioService {
 
     public Funcionario findById(Long id) {
         Optional<Funcionario> obj = funcionarioRepo.findById(id);
-        return obj.orElse(null);
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! ID: " + id));
     } 
 
     public Funcionario findByCpf(String cpf) {
         Optional<Funcionario> obj = funcionarioRepo.findByCpf(cpf);
-        return obj.orElse(null);
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! CPF: " + cpf));
     }
 }

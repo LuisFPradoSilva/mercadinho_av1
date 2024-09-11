@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.avaliacao.domains.Produto;
 import com.avaliacao.domains.dtos.ProdutoDTO;
 import com.avaliacao.repositories.ProdutoRepository;
+import com.avaliacao.services.exceptions.ObjectNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +24,6 @@ public class ProdutoService {
 
     public Produto findById(int id) {
         Optional<Produto> obj = produtoRepo.findById(id);
-        return obj.orElse(null);
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! ID: " + id));
     }
 }
