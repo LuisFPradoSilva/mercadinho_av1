@@ -29,7 +29,7 @@ public class FuncionarioDTO {
         this.id = obj.getId();
         this.cpf = obj.getCpf();
         this.nome = obj.getNome();
-        this.telefone = obj.getNome();
+        this.telefone = obj.getTelefone();
         this.dataCadastro = obj.getDataCadastro();
         this.tipoPessoa = obj.getTipoPessoa().stream().map(x -> x.getId()).collect(Collectors.toSet());
         this.cargo = obj.getCargo();

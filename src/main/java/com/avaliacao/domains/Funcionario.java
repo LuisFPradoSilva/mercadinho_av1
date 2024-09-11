@@ -34,6 +34,8 @@ public class Funcionario extends Pessoa {
         this.tipoPessoa = obj.getTipoPessoa().stream().map(x -> x.getId()).collect(Collectors.toSet());
         addTipoPessoa(TipoPessoa.FUNCIONARIO);
         addTipoPessoa(TipoPessoa.CLIENTE);
+        this.cargo = obj.getCargo();
+        this.salario = obj.getSalario();
     }
 
     public String getCargo() {

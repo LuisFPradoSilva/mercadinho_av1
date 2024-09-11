@@ -35,10 +35,10 @@ public class Produto {
     private double peso;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate dataFabricacao;
+    private LocalDate dataFabricacao = LocalDate.now();
 
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate dataValidade;
+    private LocalDate dataValidade = LocalDate.now();
     private double qtdEstoque;
 
     @ElementCollection(fetch = FetchType.EAGER)
