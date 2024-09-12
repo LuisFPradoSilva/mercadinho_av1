@@ -17,6 +17,8 @@ import com.avaliacao.domains.Cliente;
 import com.avaliacao.domains.dtos.ClienteDTO;
 import com.avaliacao.services.ClienteService;
 
+import jakarta.validation.Valid;
+
 
 
 @RestController
@@ -44,7 +46,7 @@ public class ClienteResource {
     }
 
     @PostMapping
-    public ResponseEntity<ClienteDTO> create(@RequestBody ClienteDTO objDto) {
+    public ResponseEntity<ClienteDTO> create(@Valid @RequestBody ClienteDTO objDto) {
         Cliente newObj = clienteService.create(objDto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
         return ResponseEntity.created(uri).build();

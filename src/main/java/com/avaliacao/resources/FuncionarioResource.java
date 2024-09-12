@@ -14,6 +14,8 @@ import com.avaliacao.domains.Funcionario;
 import com.avaliacao.domains.dtos.FuncionarioDTO;
 import com.avaliacao.services.FuncionarioService;
 
+import jakarta.validation.Valid;
+
 import java.net.URI;
 import java.util.List;
 
@@ -42,7 +44,7 @@ public class FuncionarioResource {
     }
 
     @PostMapping
-    public ResponseEntity<FuncionarioDTO> create(@RequestBody FuncionarioDTO objDto) {
+    public ResponseEntity<FuncionarioDTO> create(@Valid @RequestBody FuncionarioDTO objDto) {
         Funcionario newObj = funcionarioService.crate(objDto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
         return ResponseEntity.created(uri).build();

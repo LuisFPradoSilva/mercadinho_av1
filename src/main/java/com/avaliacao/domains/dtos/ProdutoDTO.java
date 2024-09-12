@@ -5,6 +5,9 @@ import com.avaliacao.domains.enums.TipoProduto;
 import com.avaliacao.domains.enums.UnidadeMedida;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.Set;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -13,8 +16,17 @@ import java.util.stream.Collectors;
 public class ProdutoDTO {
 
     protected int id;
+
+    @NotNull(message = "O campo descrição não pode ser nulo")
+    @NotBlank(message = "O campo descrição não pode ser vazio")
     protected String descricao;
+
+    @NotNull(message = "O campo valor não pode ser nulo")
+    @NotBlank(message = "O campo valor não pode ser vazio")
     protected double valor;
+
+    @NotNull(message = "O campo peso não pode ser nulo")
+    @NotBlank(message = "O campo peso não pode ser vazio")
     protected double peso;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
@@ -22,6 +34,9 @@ public class ProdutoDTO {
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDate dataValidade;
+
+    @NotNull(message = "O campo quantidade em estoque não pode ser nulo")
+    @NotBlank(message = "O campo quantidade em estoque não pode ser vazio")
     protected double qtdEstoque;
     protected Set<Integer> tipoProduto = new HashSet<>();
     protected Set<Integer> unidadeMedida = new HashSet<>();

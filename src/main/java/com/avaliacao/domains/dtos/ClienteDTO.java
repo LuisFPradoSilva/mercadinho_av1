@@ -9,11 +9,23 @@ import com.avaliacao.domains.Cliente;
 import com.avaliacao.domains.enums.TipoPessoa;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class ClienteDTO {
 
     protected Long id;
+
+    @NotNull(message = "O campo CPF não pode ser nulo")
+    @NotBlank(message = "O campo CPF não pode ser vazio")
     protected String cpf;
+
+    @NotNull(message = "O campo nome não pode ser nulo")
+    @NotBlank(message = "O campo nome não pode ser vazio")
     protected String nome;
+
+    @NotNull(message = "O campo telefone não pode ser nulo")
+    @NotBlank(message = "O campo telefone não pode ser vazio")
     protected String telefone;
 
     @JsonFormat(pattern = "dd/MM/yyyy")

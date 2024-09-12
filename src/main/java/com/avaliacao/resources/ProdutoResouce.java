@@ -14,6 +14,8 @@ import com.avaliacao.domains.Produto;
 import com.avaliacao.domains.dtos.ProdutoDTO;
 import com.avaliacao.services.ProdutoService;
 
+import jakarta.validation.Valid;
+
 import java.net.URI;
 import java.util.List;
 
@@ -36,7 +38,7 @@ public class ProdutoResouce {
     }
 
     @PostMapping
-    public ResponseEntity<ProdutoDTO> create(@RequestBody ProdutoDTO objDto) {
+    public ResponseEntity<ProdutoDTO> create(@Valid @RequestBody ProdutoDTO objDto) {
         Produto newObj = produtoService.create(objDto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
         return ResponseEntity.created(uri).build();
