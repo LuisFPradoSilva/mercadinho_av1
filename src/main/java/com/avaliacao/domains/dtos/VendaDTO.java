@@ -6,16 +6,28 @@ import java.util.UUID;
 import com.avaliacao.domains.Venda;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.validation.constraints.NotNull;
+
 public class VendaDTO {
 
     private UUID id;
+
+    @NotNull(message = "O campo quantidade de produtos é obrigatório!")
     private double qtdProdutos;
+
+    @NotNull(message = "O campo valor total é obrigatório!")
     private double valorTotal;
+
+    @NotNull(message = "O campo desconto é obrigatório!")
     private double desconto;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataVenda = LocalDate.now();
+
+    @NotNull(message = "O campo forma de pagamento é obrigatório!")
     private String formaPagamento;
+
+    @NotNull(message = "O campo cliente é obrigatório!")
     private Long cliente;
     private String nomeCliente;
 
