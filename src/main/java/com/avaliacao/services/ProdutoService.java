@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.avaliacao.domains.Produto;
 import com.avaliacao.domains.dtos.ProdutoDTO;
 import com.avaliacao.repositories.ProdutoRepository;
+import com.avaliacao.services.exceptions.DataIntegrityViolationException;
 import com.avaliacao.services.exceptions.ObjectNotFoundException;
 
 import java.util.List;
@@ -38,5 +39,14 @@ public class ProdutoService {
         Produto oldObj = findById(id);
         oldObj = new Produto(objDto);
         return produtoRepo.save(oldObj);
+    }
+
+    public void delete(int id) {
+        Produto obj = findById(id);
+
+        if(obj.getVendas().size() > 0) {
+            throw new DataIntegrityViolationException("O produto já está presente em vendas realizadas!");
+        }
+        produtoRepo.deleteById(id);
     }
 }
