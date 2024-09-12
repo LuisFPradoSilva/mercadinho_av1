@@ -59,4 +59,8 @@ public class VendaService {
         oldObj = newVenda(objDto);
         return vendaRepo.save(oldObj);
     }
+
+    public void delete(UUID id) {
+        vendaRepo.deleteById(id);
+    }
 }
