@@ -48,6 +48,15 @@ public class ClienteService {
         return clienteRepo.save(oldObj);
     }
 
+    public void delete(Long id) {
+        Cliente obj = findById(id);
+
+        if(obj.getVendas().size() > 0) {
+            throw new DataIntegrityViolationException("O cliente já realizou compras no mercado!");
+        }
+        clienteRepo.deleteById(id);
+    }
+
     private void validaPorCPF(ClienteDTO objDto) {
         Optional<Cliente> obj = clienteRepo.findByCpf(objDto.getCpf());
 
