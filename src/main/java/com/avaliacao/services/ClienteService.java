@@ -40,6 +40,14 @@ public class ClienteService {
         return clienteRepo.save(newObj);
     }
 
+    public Cliente update(Long id, ClienteDTO objDto) {
+        objDto.setId(id);
+        Cliente oldObj = findById(id);
+        validaPorCPF(objDto);
+        oldObj = new Cliente(objDto);
+        return clienteRepo.save(oldObj);
+    }
+
     private void validaPorCPF(ClienteDTO objDto) {
         Optional<Cliente> obj = clienteRepo.findByCpf(objDto.getCpf());
 
