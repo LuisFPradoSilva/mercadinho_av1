@@ -32,4 +32,11 @@ public class ProdutoService {
         Produto newObj = new Produto(objDto);
         return produtoRepo.save(newObj);
     }
+
+    public Produto update(int id, ProdutoDTO objDto) {
+        objDto.setId(id);
+        Produto oldObj = findById(id);
+        oldObj = new Produto(objDto);
+        return produtoRepo.save(oldObj);
+    }
 }
