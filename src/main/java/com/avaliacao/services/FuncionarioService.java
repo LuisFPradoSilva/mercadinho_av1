@@ -40,6 +40,14 @@ public class FuncionarioService {
         return funcionarioRepo.save(newObj);
     }
 
+    public Funcionario update(Long id, FuncionarioDTO objDto) {
+        objDto.setId(id);
+        Funcionario oldObj = findById(id);
+        validaPorCPF(objDto);
+        oldObj = new Funcionario(objDto);
+        return funcionarioRepo.save(oldObj);
+    }
+
         private void validaPorCPF(FuncionarioDTO objDto) {
         Optional<Funcionario> obj = funcionarioRepo.findByCpf(objDto.getCpf());
 
