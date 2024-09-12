@@ -2,6 +2,7 @@ package com.avaliacao.resources;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,5 +56,11 @@ public class FuncionarioResource {
     public ResponseEntity<FuncionarioDTO> update(@PathVariable Long id, @Valid @RequestBody FuncionarioDTO objDto) {
         Funcionario obj = funcionarioService.update(id, objDto);
         return ResponseEntity.ok().body(new FuncionarioDTO(obj));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<FuncionarioDTO> delete(@PathVariable Long id) {
+        funcionarioService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

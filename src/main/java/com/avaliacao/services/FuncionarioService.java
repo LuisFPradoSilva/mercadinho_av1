@@ -48,6 +48,10 @@ public class FuncionarioService {
         return funcionarioRepo.save(oldObj);
     }
 
+    public void delete(Long id) {
+        funcionarioRepo.deleteById(id);
+    }
+
         private void validaPorCPF(FuncionarioDTO objDto) {
         Optional<Funcionario> obj = funcionarioRepo.findByCpf(objDto.getCpf());
 
