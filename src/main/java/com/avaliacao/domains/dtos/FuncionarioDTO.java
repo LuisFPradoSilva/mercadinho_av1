@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 public class FuncionarioDTO {
 
@@ -36,8 +37,7 @@ public class FuncionarioDTO {
     @NotBlank(message = "O campo cargo não pode ser vazio")
     protected String cargo;
 
-    @NotNull(message = "O campo salario não pode ser nulo")
-    @NotBlank(message = "O campo salario não pode ser vazio")
+    @Positive(message = "O campo salario deve ser maior que zero")
     protected double salario;
 
     public FuncionarioDTO() {

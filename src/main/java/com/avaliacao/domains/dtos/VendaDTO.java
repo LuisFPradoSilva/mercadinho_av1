@@ -7,18 +7,19 @@ import com.avaliacao.domains.Venda;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 public class VendaDTO {
 
     private UUID id;
 
-    @NotNull(message = "O campo quantidade de produtos é obrigatório!")
+    @Positive(message = "O campo quantidade de produtos deve ser maior que zero")
     private double qtdProdutos;
 
-    @NotNull(message = "O campo valor total é obrigatório!")
+    @Positive(message = "O campo valor total deve ser maior que zero")
     private double valorTotal;
 
-    @NotNull(message = "O campo desconto é obrigatório!")
+    @Positive(message = "O campo desconto deve ser maior que zero")
     private double desconto;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
