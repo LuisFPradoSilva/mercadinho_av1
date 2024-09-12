@@ -6,8 +6,10 @@ import java.util.UUID;
 import com.avaliacao.domains.Venda;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 
 public class VendaDTO {
 
@@ -19,13 +21,14 @@ public class VendaDTO {
     @Positive(message = "O campo valor total deve ser maior que zero")
     private double valorTotal;
 
-    @Positive(message = "O campo desconto deve ser maior que zero")
+    @PositiveOrZero(message = "O campo desconto deve ser maior que zero")
     private double desconto;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataVenda = LocalDate.now();
 
     @NotNull(message = "O campo forma de pagamento é obrigatório!")
+    @NotBlank(message = "O campo forma de pagamento é obrigatório!")
     private String formaPagamento;
 
     @NotNull(message = "O campo cliente é obrigatório!")
